@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsabilidad Social Empresaria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #faf7ef;
+    --bg-alt: #f1efe1;
+    --paper: #ffffff;
+    --forest: #1e3a2b;
+    --forest-mid: #3c6a4c;
+    --sage: #8fa683;
+    --sage-light: #dfe7d4;
+    --clay: #b96a3f;
+    --clay-light: #f0dcc9;
+    --gold: #c99a45;
+    --ink: #23291f;
+    --ink-soft: #5a6152;
+    --line: #d9d2bd;
+    --radius: 22px;
+    --radius-sm: 14px;
+    --maxw: 1140px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration: .001ms !important; transition-duration: .001ms !important;}
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Karla', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;display:block;}
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    color:var(--forest);
+    margin:0 0 .4em 0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0 0 1em 0; color:var(--ink-soft);}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  section{padding:100px 0;}
+  .section-tag{
+    font-family:'Karla',sans-serif;
+    font-size:.8rem;
+    letter-spacing:.08em;
+    color:var(--clay);
+    font-weight:700;
+    margin-bottom:14px;
+    display:inline-block;
+  }
+  .section-head{max-width:680px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.7rem, 3.2vw, 2.5rem);}
+  .section-head p{font-size:1.08rem;}
+
+  /* ===== reveal on scroll ===== */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-stagger.in > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in > *:nth-child(1){transition-delay:.03s;}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:.12s;}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:.21s;}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:.30s;}
+  .reveal-stagger.in > *:nth-child(5){transition-delay:.39s;}
+  .reveal-stagger.in > *:nth-child(6){transition-delay:.48s;}
+
+  /* ===== nav ===== */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,247,239,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:600; color:var(--forest); font-size:1.05rem;}
+  .brand svg{width:26px; height:26px;}
+  nav.links{display:flex; gap:26px; font-size:.92rem;}
+  nav.links a{text-decoration:none; color:var(--ink-soft); font-weight:600;}
+  nav.links a:hover{color:var(--clay);}
+  @media (max-width:720px){ nav.links{display:none;} }
+
+  /* ===== hero ===== */
+  .hero{
+    position:relative;
+    padding:96px 0 70px;
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center;
+  }
+  @media (max-width:860px){ .hero-inner{grid-template-columns:1fr;} }
+  .eyebrow{
+    font-size:.85rem; font-weight:700; letter-spacing:.06em; color:var(--forest-mid);
+    background:var(--sage-light); display:inline-block; padding:6px 14px; border-radius:100px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5.2vw, 3.6rem);
+    line-height:1.06;
+  }
+  .hero .subtitle{
+    font-size:1.18rem; color:var(--ink-soft); max-width:480px; margin-top:16px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--forest); color:#fdfbf5; text-decoration:none;
+    padding:14px 26px; border-radius:100px; font-weight:700; font-size:.98rem;
+    border:none; cursor:pointer; margin-top:30px;
+    transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+    box-shadow:0 8px 20px rgba(30,58,43,.18);
+  }
+  .btn:hover{background:var(--forest-mid); transform:translateY(-2px); box-shadow:0 12px 26px rgba(30,58,43,.25);}
+  .btn svg{width:16px;height:16px;}
+
+  .hero-art{position:relative; display:flex; justify-content:center;}
+  .hero-art svg{width:100%; height:auto; max-width:420px;}
+  .grow-in{transform-origin:bottom center; animation:growUp 1.1s ease both .15s;}
+  @keyframes growUp{from{transform:scaleY(.85) translateY(14px); opacity:0;} to{transform:scaleY(1) translateY(0); opacity:1;}}
+  .fade-in-slow{animation:fadeInSlow 1.3s ease both .1s;}
+  @keyframes fadeInSlow{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
+  .leaf-sway{animation:sway 5s ease-in-out infinite;}
+  @keyframes sway{0%,100%{transform:rotate(0deg);} 50%{transform:rotate(3deg);}}
+
+  /* ===== cards ===== */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  @media (max-width:900px){ .grid-3{grid-template-columns:1fr 1fr;} .grid-4{grid-template-columns:1fr 1fr;} }
+  @media (max-width:620px){ .grid-3{grid-template-columns:1fr;} .grid-4{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    border:1px solid var(--line);
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card:hover{transform:translateY(-5px); box-shadow:0 18px 34px rgba(30,58,43,.1); border-color:var(--sage);}
+  .card .icon-badge{
+    width:52px; height:52px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--sage-light); color:var(--forest-mid);
+    margin-bottom:18px;
+  }
+  .card .icon-badge svg{width:26px; height:26px;}
+  .card h3{font-size:1.2rem; margin-bottom:8px;}
+  .card p{font-size:.97rem; margin-bottom:0;}
+
+  .pillar-card .icon-badge{background:var(--clay-light); color:var(--clay);}
+
+  /* ===== comparativa interna/externa ===== */
+  .compare-wrap{position:relative;}
+  .compare-card{
+    background:var(--paper); border-radius:var(--radius); padding:34px 30px;
+    border:1px solid var(--line); position:relative;
+  }
+  .compare-card.internal{border-top:5px solid var(--forest-mid);}
+  .compare-card.external{border-top:5px solid var(--clay);}
+  .compare-card h3{font-size:1.3rem; display:flex; align-items:center; gap:10px;}
+  .compare-card ul{margin:16px 0 0 0; padding:0; list-style:none;}
+  .compare-card li{
+    padding:10px 0 10px 26px; position:relative; font-size:.96rem; color:var(--ink-soft);
+    border-top:1px solid var(--line);
+  }
+  .compare-card li:first-child{border-top:none;}
+  .compare-card li::before{
+    content:''; position:absolute; left:0; top:18px; width:9px; height:9px; border-radius:50%;
+  }
+  .compare-card.internal li::before{background:var(--forest-mid);}
+  .compare-card.external li::before{background:var(--clay);}
+  .vs-badge{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:56px; height:56px; border-radius:50%; background:var(--gold); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif;
+    font-weight:600; font-size:.95rem; box-shadow:0 10px 24px rgba(201,154,69,.4);
+    z-index:5;
+  }
+  @media (max-width:860px){ .vs-badge{display:none;} }
+
+  /* ===== deber-ser grouped grid ===== */
+  .duty-group{margin-bottom:30px;}
+  .duty-group h4{font-size:1.02rem; color:var(--forest-mid); margin-bottom:14px; display:flex; align-items:center; gap:10px;}
+  .duty-group h4 svg{width:20px;height:20px; flex:none;}
+  .duty-list{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 24px;}
+  @media (max-width:700px){ .duty-list{grid-template-columns:1fr;} }
+  .duty-list li{
+    background:var(--paper); border:1px solid var(--line); border-radius:12px;
+    padding:13px 16px 13px 40px; font-size:.92rem; color:var(--ink-soft); position:relative;
+  }
+  .duty-list li::before{
+    content:'✓'; position:absolute; left:14px; top:12px; color:var(--forest-mid); font-weight:700;
+  }
+
+  /* ===== section alt background ===== */
+  .alt{background:var(--bg-alt);}
+  .alt-forest{background:var(--forest); color:#eef2ea;}
+  .alt-forest h2, .alt-forest h3, .alt-forest .section-tag{color:#f4f1e2;}
+  .alt-forest p{color:#c9d6c3;}
+
+  /* ===== cadena textil pilares ===== */
+  .pilares-row{display:flex; gap:22px; margin-top:10px;}
+  @media (max-width:800px){ .pilares-row{flex-direction:column;} }
+  .pilar{
+    flex:1; background:var(--paper); border-radius:var(--radius-sm); padding:26px 22px; text-align:center;
+    border:1px solid var(--line);
+  }
+  .pilar .emoji{font-size:2rem; margin-bottom:10px;}
+  .pilar h4{font-size:1.02rem; margin-bottom:6px; color:var(--forest);}
+  .pilar p{font-size:.9rem; margin:0;}
+  .actors-box{
+    margin-top:34px; background:var(--sage-light); border-radius:var(--radius-sm); padding:26px 28px;
+  }
+  .actors-box h4{color:var(--forest); font-size:1rem; margin-bottom:10px;}
+  .actors-box ul{margin:0; padding-left:20px; color:var(--ink-soft); font-size:.94rem;}
+  .actors-box li{margin-bottom:6px;}
+
+  /* ===== proceso cadena ===== */
+  .chain-scroll{overflow-x:auto; padding-bottom:14px; -webkit-overflow-scrolling:touch;}
+  .chain{
+    display:flex; align-items:stretch; gap:0; min-width:900px; padding:10px 4px 24px;
+  }
+  .chain-step{
+    flex:1; background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    padding:22px 18px; text-align:center; position:relative; min-width:150px;
+  }
+  .chain-step .n{
+    width:34px; height:34px; border-radius:50%; background:var(--forest); color:#fff;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 12px;
+    font-family:'Fraunces',serif; font-weight:600; font-size:.9rem;
+  }
+  .chain-step .icon{width:34px; height:34px; margin:0 auto 10px; color:var(--forest-mid);}
+  .chain-step h4{font-size:.86rem; margin-bottom:0; color:var(--forest); line-height:1.3;}
+  .chain-arrow{
+    flex:0 0 46px; display:flex; align-items:center; justify-content:center;
+    color:var(--clay);
+  }
+  .chain-arrow svg{width:34px; height:18px;}
+  .chain-arrow .dash{
+    stroke-dasharray:6 6; stroke-dashoffset:60; animation:dashmove 2.4s linear infinite;
+  }
+  @keyframes dashmove{ to{ stroke-dashoffset:0; } }
+  @media (max-width:720px){
+    .chain{min-width:1000px;}
+  }
+
+  /* ===== impactos ===== */
+  .impact-card{
+    background:var(--paper); border-radius:var(--radius); padding:30px 26px;
+    border:1px solid var(--line); height:100%;
+  }
+  .impact-card .icon-badge{width:48px;height:48px;border-radius:12px;margin-bottom:16px;}
+  .impact-card.personal .icon-badge{background:#f4e3d6; color:var(--clay);}
+  .impact-card.economico .icon-badge{background:var(--sage-light); color:var(--forest-mid);}
+  .impact-card.ambiental .icon-badge{background:#e2ede0; color:#3c6a4c;}
+  .impact-card.genero .icon-badge{background:#f1e2ea; color:#a4527a;}
+  .impact-card ul{margin:10px 0 0; padding-left:18px; font-size:.9rem; color:var(--ink-soft);}
+  .impact-card li{margin-bottom:6px;}
+  .genero-note{
+    margin-top:40px; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-sm);
+    padding:26px 28px;
+  }
+  .genero-note h4{color:var(--forest); font-size:1.02rem; margin-bottom:10px;}
+  .genero-note p{font-size:.95rem; margin-bottom:10px;}
+  .genero-note cite{font-style:normal; color:var(--ink-soft); font-size:.85rem;}
+
+  /* ===== mapa mental ===== */
+  .mindmap{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:44px 34px;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .mm-root{
+    background:var(--forest); color:#fdfbf5; font-family:'Fraunces',serif; font-weight:600;
+    padding:16px 30px; border-radius:100px; font-size:1.05rem; text-align:center;
+    box-shadow:0 10px 26px rgba(30,58,43,.2);
+  }
+  .mm-branches{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:40px; width:100%;
+  }
+  @media (max-width:860px){ .mm-branches{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:480px){ .mm-branches{grid-template-columns:1fr;} }
+  .mm-node{
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:14px;
+    padding:16px 14px; text-align:center; font-size:.9rem; font-weight:600; color:var(--forest-mid);
+    position:relative;
+  }
+  .mm-node::before{
+    content:''; position:absolute; top:-26px; left:50%; width:1px; height:26px; background:var(--line);
+  }
+
+  /* ===== conclusion ===== */
+  .conclusion-box{
+    max-width:820px; margin:0 auto; text-align:center;
+  }
+  .quote-mark{font-family:'Fraunces',serif; font-size:3.4rem; color:var(--gold); line-height:1; margin-bottom:6px;}
+  .conclusion-box p.lead{
+    font-family:'Fraunces',serif; font-size:clamp(1.25rem,2.6vw,1.65rem); color:#f4f1e2; line-height:1.5;
+    font-weight:500;
+  }
+  .conclusion-art{margin:36px auto 0; width:180px;}
+
+  /* ===== footer ===== */
+  footer{
+    background:#152a1e; color:#b9c6b3; padding:44px 0; text-align:center; font-size:.88rem;
+  }
+  footer strong{color:#e7ecdf; display:block; font-family:'Fraunces',serif; font-size:1.05rem; margin-bottom:6px; font-weight:600;}
+
+  ::selection{background:var(--sage); color:#fff;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8Z"/><path d="M12 13v8"/></svg>
+      RSE
+    </div>
+    <nav class="links">
+      <a href="#que-es">Qué es</a>
+      <a href="#interna-externa">Interna / Externa</a>
+      <a href="#deberes">Responsabilidades</a>
+      <a href="#cadena">Caso de estudio</a>
+      <a href="#mapa">Mapa</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow fade-in-slow">Economía Social — Trabajo práctico</span>
+      <h1 class="fade-in-slow">Responsabilidad Social Empresaria</h1>
+      <p class="subtitle fade-in-slow">Empresas, sociedad y ambiente: una forma responsable de actuar.</p>
+      <a href="#que-es" class="btn">
+        Conocer la RSE
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+    <div class="hero-art">
+      <svg class="grow-in" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="210" cy="350" rx="170" ry="18" fill="#e4dcc2"/>
+        <!-- trunk -->
+        <rect x="196" y="210" width="28" height="110" rx="8" fill="#8a6a45"/>
+        <!-- canopy -->
+        <g class="leaf-sway" style="transform-origin:210px 160px;">
+          <circle cx="210" cy="150" r="92" fill="#4f7c56"/>
+          <circle cx="150" cy="180" r="60" fill="#5f8c63"/>
+          <circle cx="270" cy="180" r="60" fill="#5f8c63"/>
+          <circle cx="210" cy="100" r="55" fill="#6f9b6e"/>
+        </g>
+        <!-- rising bars -->
+        <rect x="60" y="300" width="26" height="40" rx="4" fill="var(--clay)"/>
+        <rect x="96" y="270" width="26" height="70" rx="4" fill="var(--clay)"/>
+        <rect x="298" y="260" width="26" height="80" rx="4" fill="var(--gold)"/>
+        <rect x="334" y="230" width="26" height="110" rx="4" fill="var(--gold)"/>
+        <!-- people silhouettes -->
+        <circle cx="140" cy="250" r="12" fill="#1e3a2b"/>
+        <rect x="130" y="262" width="20" height="34" rx="8" fill="#1e3a2b"/>
+        <circle cx="290" cy="240" r="12" fill="#b96a3f"/>
+        <rect x="280" y="252" width="20" height="34" rx="8" fill="#b96a3f"/>
+        <circle cx="215" cy="230" r="11" fill="#3c6a4c"/>
+        <rect x="205" y="241" width="20" height="32" rx="8" fill="#3c6a4c"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUE ES LA RSE ===================== -->
+<section id="que-es">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">Definición</span>
+      <h2>¿Qué es la RSE?</h2>
+      <p>La Responsabilidad Social Empresaria es un modelo de prácticas organizacionales por medio del cual se procura la sostenibilidad económica, social y ambiental como reglas de juego que garanticen el desarrollo de las empresas.</p>
+    </div>
+    <div class="grid-3 reveal-stagger reveal">
+      <div class="card">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M6 21V9l6-4 6 4v12M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>Económica</h3>
+        <p>Sostenibilidad y desarrollo de la empresa.</p>
+      </div>
+      <div class="card">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3.2"/><circle cx="17" cy="10" r="2.6"/><path d="M2.5 20c.5-3.6 2.8-5.6 5.5-5.6s5 2 5.5 5.6M14 20c.3-2.6 1.8-4.2 3.6-4.5"/></svg>
+        </div>
+        <h3>Social</h3>
+        <p>Consideración de trabajadores, comunidades y sociedad.</p>
+      </div>
+      <div class="card">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8Z"/><path d="M12 13v8"/></svg>
+        </div>
+        <h3>Ambiental</h3>
+        <p>Cuidado del ambiente y uso responsable de los recursos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INTERNA / EXTERNA ===================== -->
+<section id="interna-externa" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">Dos miradas</span>
+      <h2>Responsabilidad interna y externa</h2>
+      <p>La Responsabilidad Social Empresarial puede entenderse desde dos perspectivas, según quién define cómo actuar la organización.</p>
+    </div>
+    <div class="compare-wrap grid-2 reveal">
+      <div class="compare-card internal">
+        <h3>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--forest-mid)" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>
+          Responsabilidad interna
+        </h3>
+        <ul>
+          <li>Organización sujeto.</li>
+          <li>La persona decide libremente cómo actuar.</li>
+          <li>Acciones éticas y voluntarias.</li>
+          <li>Considera a los miembros de la organización, la sociedad y la comunidad.</li>
+        </ul>
+      </div>
+      <div class="compare-card external">
+        <h3>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--clay)" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M3 10h18"/></svg>
+          Responsabilidad externa
+        </h3>
+        <ul>
+          <li>Organización objeto.</li>
+          <li>Surge de las demandas de otros y de la ley.</li>
+          <li>Se relaciona con la conducta moral.</li>
+          <li>Considera condiciones externas y modelos sociales.</li>
+        </ul>
+      </div>
+      <div class="vs-badge">vs</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUE DEBE HACER UNA EMPRESA RESPONSABLE ===================== -->
+<section id="deberes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">En la práctica</span>
+      <h2>¿Qué debe hacer una empresa responsable?</h2>
+      <p>La empresa socialmente responsable valora el impacto de sus acciones en las comunidades, los trabajadores y el medio ambiente, e incorpora efectivamente sus intereses en sus procesos y resultados.</p>
+    </div>
+
+    <div class="duty-group reveal">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-mid)" stroke-width="1.8"><circle cx="8" cy="9" r="3.2"/><circle cx="17" cy="10" r="2.6"/><path d="M2.5 20c.5-3.6 2.8-5.6 5.5-5.6s5 2 5.5 5.6M14 20c.3-2.6 1.8-4.2 3.6-4.5"/></svg>
+        Trabajadores y comunidad
+      </h4>
+      <ul class="duty-list">
+        <li>Servir a la sociedad con productos útiles y en condiciones justas.</li>
+        <li>Respetar los derechos humanos con condiciones de trabajo dignas que favorezcan la seguridad, la salud laboral y el desarrollo humano y profesional.</li>
+        <li>Supervisión de las condiciones laborales y de salud de los/as trabajadores/as.</li>
+        <li>Implicar a los empleados en las buenas prácticas de RSE.</li>
+        <li>Implicar a los consumidores, comunidades locales y resto de la sociedad.</li>
+        <li>Mejorar las posibilidades y oportunidades de la comunidad donde se establece la empresa.</li>
+      </ul>
+    </div>
+
+    <div class="duty-group reveal">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3c6a4c" stroke-width="1.8"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8Z"/><path d="M12 13v8"/></svg>
+        Ambiente y recursos
+      </h4>
+      <ul class="duty-list">
+        <li>Respetar el medio ambiente, evitando la contaminación y minimizando la generación de residuos.</li>
+        <li>Racionalizar el uso de los recursos naturales y energéticos.</li>
+        <li>Seguimiento de la gestión de los recursos y los residuos.</li>
+        <li>Revisión de la eficiencia energética de la empresa.</li>
+        <li>Correcto uso del agua.</li>
+        <li>Lucha contra el cambio climático y evaluación de riesgos ambientales y sociales.</li>
+      </ul>
+    </div>
+
+    <div class="duty-group reveal">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--clay)" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        Ética, legalidad y gestión económica
+      </h4>
+      <ul class="duty-list">
+        <li>Crear riqueza de la manera más eficaz posible.</li>
+        <li>Procurar la continuidad de la empresa y, si es posible, un crecimiento razonable.</li>
+        <li>Cumplir con rigor las leyes, reglamentos, normas y costumbres, respetando contratos y compromisos.</li>
+        <li>Procurar la distribución equitativa de la riqueza generada.</li>
+        <li>Seguimiento del cumplimiento de la legislación por parte de la empresa.</li>
+        <li>Mantenimiento de la ética empresarial y lucha contra la corrupción.</li>
+      </ul>
+    </div>
+
+    <div class="duty-group reveal">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4-9-4Z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
+        Producción, cadena y reputación
+      </h4>
+      <ul class="duty-list">
+        <li>Supervisión de la adecuación de la cadena de suministro.</li>
+        <li>Diseño e implementación de estrategias de asociación y colaboración de la empresa.</li>
+        <li>Marketing y construcción de la reputación corporativa.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CADENA TEXTIL ===================== -->
+<section id="cadena" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">Experiencia de éxito en Argentina</span>
+      <h2>Cadena Textil Justa y Solidaria</h2>
+      <p>Del algodón agroecológico a la fábrica recuperada. En 2003, la organización civil Otro Mercado al Sur se propuso montar un proyecto que permita un encadenamiento solidario centrado en la producción de algodón ecológico: la Cadena Textil Solidaria (CTS), una marca colectiva de textiles agroecológicos de comercio justo.</p>
+    </div>
+
+    <div class="pilares-row reveal-stagger reveal">
+      <div class="pilar">
+        <div class="emoji">🌱</div>
+        <h4>Producción agroecológica</h4>
+        <p>Algodón producido por familias campesinas de Chaco y Corrientes.</p>
+      </div>
+      <div class="pilar">
+        <div class="emoji">🤝</div>
+        <h4>Comercio justo y economía solidaria</h4>
+        <p>Prendas elaboradas por obreros de una empresa textil recuperada.</p>
+      </div>
+      <div class="pilar">
+        <div class="emoji">🛍️</div>
+        <h4>Consumo responsable</h4>
+        <p>Venta en el circuito de comercio justo internacional.</p>
+      </div>
+    </div>
+
+    <div class="actors-box reveal">
+      <h4>La cadena está formada por un consorcio de empresas de la economía solidaria:</h4>
+      <ul>
+        <li>Asociación Civil Otro Mercado al Sur.</li>
+        <li>Cooperativa de Trabajo Textiles Pigüé.</li>
+        <li>Cooperativa Agroecológica del Litoral.</li>
+        <li>Altromercato Argentina S.A. — empresa instalada en Argentina con fondos de Altromercato de Italia y participación de los actores anteriores, encargada de la comercialización de los productos de la cadena.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESO DE LA CADENA ===================== -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">Cómo funciona</span>
+      <h2>Proceso de la cadena textil</h2>
+      <p>Un camino alternativo de producción, transformación y consumo, que se aleja del concepto habitual de comprar y vender.</p>
+    </div>
+
+    <div class="chain-scroll reveal">
+      <div class="chain">
+        <div class="chain-step">
+          <div class="n">1</div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.2"/><path d="M5 21c.6-4 3-6 7-6s6.4 2 7 6"/></svg>
+          <h4>Familias productoras de algodón (Chaco y Corrientes)</h4>
+        </div>
+        <div class="chain-arrow"><svg viewBox="0 0 40 20"><path class="dash" d="M2 10h30" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg></div>
+        <div class="chain-step">
+          <div class="n">2</div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8Z"/><path d="M12 13v8"/></svg>
+          <h4>Producción agroecológica del algodón</h4>
+        </div>
+        <div class="chain-arrow"><svg viewBox="0 0 40 20"><path class="dash" d="M2 10h30" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg></div>
+        <div class="chain-step">
+          <div class="n">3</div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="10" width="18" height="10" rx="1.5"/><path d="M7 10V7l5-4 5 4v3"/></svg>
+          <h4>Trabajadores de una empresa textil recuperada</h4>
+        </div>
+        <div class="chain-arrow"><svg viewBox="0 0 40 20"><path class="dash" d="M2 10h30" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg></div>
+        <div class="chain-step">
+          <div class="n">4</div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 4h8l2 4-6 4-6-4 2-4Z"/><path d="M6 8v12h12V8"/></svg>
+          <h4>Elaboración de prendas (remeras)</h4>
+        </div>
+        <div class="chain-arrow"><svg viewBox="0 0 40 20"><path class="dash" d="M2 10h30" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg></div>
+        <div class="chain-step">
+          <div class="n">5</div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM17 8l-6 6M9 8h8v8"/></svg>
+          <h4>Comercio justo</h4>
+        </div>
+        <div class="chain-arrow"><svg viewBox="0 0 40 20"><path class="dash" d="M2 10h30" stroke="currentColor" stroke-width="2.4" fill="none"/><path d="M26 4l8 6-8 6" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg></div>
+        <div class="chain-step">
+          <div class="n">6</div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+          <h4>Venta internacional</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== IMPACTOS ===================== -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">Resultados</span>
+      <h2>Impactos de la experiencia</h2>
+    </div>
+    <div class="grid-4 reveal-stagger reveal">
+      <div class="impact-card personal">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>
+        </div>
+        <h3>Personal</h3>
+        <ul>
+          <li>Ampliación de las relaciones.</li>
+          <li>Mejora de la autoestima.</li>
+        </ul>
+      </div>
+      <div class="impact-card economico">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 6.5c0-1.9-2.2-3.5-5-3.5s-5 1.6-5 3.5S9.2 10 12 10s5 1.6 5 3.5-2.2 3.5-5 3.5-5-1.6-5-3.5"/></svg>
+        </div>
+        <h3>Económico</h3>
+        <ul>
+          <li>Mejora de los ingresos de productores y productoras.</li>
+          <li>Generación de divisas mediante la exportación.</li>
+          <li>Ingresos para las empresas recuperadas.</li>
+          <li>Generación de valor agregado en el encadenamiento.</li>
+        </ul>
+      </div>
+      <div class="impact-card ambiental">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8Z"/><path d="M12 13v8"/></svg>
+        </div>
+        <h3>Ambiental</h3>
+        <ul>
+          <li>Toda la cadena se rige por criterios ecológicos.</li>
+          <li>Se conservan métodos tradicionales de producción de algodón.</li>
+          <li>Desarrollo local en el Chaco, una de las provincias más pobres de Argentina.</li>
+          <li>Se promueve la autogestión y el comercio justo sur–sur.</li>
+        </ul>
+      </div>
+      <div class="impact-card genero">
+        <div class="icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M12 12v8M9 17h6"/></svg>
+        </div>
+        <h3>Género</h3>
+        <ul>
+          <li>Operarias de empresas recuperadas logran mejora de sus ingresos.</li>
+          <li>Mayor participación e inserción económica y social de las mujeres mediante formas de trabajo autogestionadas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="genero-note reveal">
+      <h4>Las mujeres en la economía social y solidaria</h4>
+      <p>Un trabajo realizado por "Lola Mora, investigación capacitación para la acción" y la Universidad de San Martín, entre otras entidades, estudia la participación económica de mujeres rurales y urbanas que, a través de formas de organización del trabajo autogestionarias propias de la economía solidaria, buscan una inserción económica y social más equitativa. Estas experiencias se basan en el trabajo familiar o asociativo, sin explotación de otros trabajadores, buscando asociarse y conformar redes, y cuidando la salud de productores/as, consumidores/as y del planeta que los sostiene.</p>
+      <cite>Mercedes Caracciolo Basco y María Del Pilar Foti (2010). "Las mujeres en la economía social y solidaria: experiencias rurales y urbanas en Argentina".</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MAPA VISUAL ===================== -->
+<section id="mapa">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">Síntesis</span>
+      <h2>Mapa visual de la RSE</h2>
+    </div>
+    <div class="mindmap reveal">
+      <div class="mm-root">Responsabilidad Social Empresaria</div>
+      <div class="mm-branches reveal-stagger reveal">
+        <div class="mm-node">Económica</div>
+        <div class="mm-node">Social</div>
+        <div class="mm-node">Ambiental</div>
+        <div class="mm-node">Trabajadores</div>
+        <div class="mm-node">Comunidad</div>
+        <div class="mm-node">Cumplimiento de leyes</div>
+        <div class="mm-node">Producción responsable</div>
+        <div class="mm-node">Consumo responsable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONCLUSION ===================== -->
+<section class="alt-forest">
+  <div class="wrap">
+    <div class="conclusion-box reveal">
+      <div class="quote-mark">"</div>
+      <p class="lead">La Responsabilidad Social Empresaria implica una contribución activa y voluntaria para mejorar la sociedad, la economía y el ambiente, teniendo en cuenta el impacto de las actividades de la empresa sobre trabajadores, comunidades y entorno.</p>
+      <svg class="conclusion-art" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="108" rx="80" ry="8" fill="#0f2016"/>
+        <circle cx="100" cy="55" r="42" fill="#3c6a4c"/>
+        <rect x="92" y="90" width="16" height="26" rx="5" fill="#8a6a45"/>
+        <circle cx="60" cy="95" r="9" fill="#c99a45"/>
+        <rect x="53" y="103" width="14" height="20" rx="6" fill="#c99a45"/>
+        <circle cx="140" cy="90" r="9" fill="#b96a3f"/>
+        <rect x="133" y="98" width="14" height="22" rx="6" fill="#b96a3f"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <strong>Economía Social — Trabajo práctico</strong>
+    Responsabilidad Social Empresaria
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // smooth scroll fallback for older browsers already handled by CSS scroll-behavior
+</script>
+</body>
+</html>
